@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import actions from 'StoreRedux/actions';
+import operations from 'StoreRedux/operations';
 
 class GoogleAuthComponent extends React.Component {
     constructor(props) {

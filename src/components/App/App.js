@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Header } from 'components/Layout/Header/Header'
 import { StreamList } from 'components/Streams/StreamList/StreamList'
-import { StreamCreate } from 'components/Streams/StreamCreate/StreamCreate'
+import StreamCreate  from 'components/Streams/StreamCreate/StreamCreate'
 import { StreamDelete } from 'components/Streams/StreamDelete/StreamDelete'
 import { StreamEdit } from 'components/Streams/StreamEdit/StreamEdit'
 import { StreamShow } from 'components/Streams/StreamShow/StreamShow'
