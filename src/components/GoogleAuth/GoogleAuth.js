@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import actions from 'StoreRedux/actions';
 import operations from 'StoreRedux/operations';
 
 class GoogleAuthComponent extends React.Component {
@@ -35,7 +34,7 @@ class GoogleAuthComponent extends React.Component {
 
     onAuthChange = isSignedIn => {
         if (isSignedIn) 
-            this.props.signIn()
+            this.props.signIn(this.auth.currentUser.get().getId())
         else {
             this.props.signOut()
         }    
@@ -66,8 +65,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchTopProps = (dispatch) => {
     return {
-        signIn: () => dispatch(actions.signIn()),
-        signOut: () => dispatch(actions.signOut())
+        signIn: (userId) => dispatch(operations.signIn(userId)),
+        signOut: () => dispatch(operations.signOut())
     }
 }
 

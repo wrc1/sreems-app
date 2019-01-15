@@ -1,9 +1,10 @@
 
 import types from '../types';
 
-const signIn = () => {
+const signIn = (value) => {
     return {
-        type: types.SIGN_IN
+        type: types.SIGN_IN,
+        payload: value
     }
 }
 
@@ -14,7 +15,6 @@ const signOut = () => {
 }
 
 const createStream = (value) => {
-    console.log('in createStream action')
     return  {
         type: types.CREATE_STREAM,
         payload: value

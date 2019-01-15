@@ -7,6 +7,7 @@ import operations from 'StoreRedux/operations';
 
 
     onSubmit = (formValues) => {
+        console.log(this.props.streams);
         this.props.createStream(formValues);
     }
 
@@ -71,7 +72,6 @@ const validate = (formValues) => {
 const mapStateToProps = (state) => {
     return {
         createStream: state.createStream
-
     }
 }
 

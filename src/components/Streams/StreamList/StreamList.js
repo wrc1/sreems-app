@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import operations from 'StoreRedux/operations';
 
 class StreamListComponent extends React.Component {
@@ -8,20 +9,66 @@ class StreamListComponent extends React.Component {
         this.props.fetchStreams();
     }
 
+    renderAdminButtons(stream) {
+        if (stream.userId === this.props.currentUserId)
+            return <div className='right floated content'>
+                <button className='ui button primary'>Edit</button>
+                <button className='ui button negative'>Delete</button>
+            </div>
+        return null;    
+    }
+
+    renderCreate() {
+        if (!this.props.isSignedIn)
+            return null;
+        return (
+            <div className='create-new-container' style={{textAlign: 'right'}}>
+                <Link className='ui button primary' to='/streams/new'>
+                    Create Stream
+                </Link>
+            </div>
+        ) 
+    }
+
+    renderList() {
+        return this.props.streams.map(stream => {
+            return (
+                <div className='item' key={stream.id}>
+                    {this.renderAdminButtons(stream)}
+                    <i className='large middle aligned icon camera'/>
+                    <div className='content'>
+                        <div className='title'>
+                            {stream.title}
+                        </div>
+                        <div className='description'>
+                            {stream.description}
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+    }
+
     render() {
         return (
-            <div className={'stream-list'}>
-                streams list
+            <div className='streams-list'>
+                <h2>Streams:</h2>
+                <div className='ui celled list'>
+                    {this.renderList()}
+                    {this.renderCreate()}
+                </div>
             </div>
         )
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        streams: Object.values(state.fetchStreams),
+        currentUserId: state.auth.userId,
+        isSignedIn: state.auth.isSignedIn
+    }
+}
 
 const mapProsToDispatch = (dispatch) => {
     return {
@@ -29,5 +76,5 @@ const mapProsToDispatch = (dispatch) => {
     }   
 }
 
-export const StreamList = connect(null, mapProsToDispatch)(StreamListComponent);
+export const StreamList = connect(mapStateToProps, mapProsToDispatch)(StreamListComponent);
 
