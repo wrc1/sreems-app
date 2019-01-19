@@ -55,5 +55,6 @@ export default {
     createStream,
     fetchStreams,
     editStream,
-    deleteStream
+    deleteStream,
+    fetchStream
 }

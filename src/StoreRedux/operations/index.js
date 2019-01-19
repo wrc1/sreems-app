@@ -43,14 +43,14 @@ const fetchStream = (id) => async (dispatch, getState) => {
     } catch(error) {
         console.log(error);
     }
-  
 }
 
 const editStream = (id, values) => async (dispatch, getState) => {
     try {
-        const response = await service.put(`/streams/${id}`, values);
+        const response = await service.patch(`/streams/${id}`, values);
         const streams = {...getState().fetchStreams, [id]: values}     
-        dispatch(actions.editStream(streams));
+        dispatch(actions.fetchStreams(streams));
+        history.push('/');
 
     } catch(error) {
         console.log(error);
@@ -62,7 +62,9 @@ const editStream = (id, values) => async (dispatch, getState) => {
 const deleteStream = (id) => async (dispatch, getState) => {
     try {
         await service.delete(`/streams/${id}`);
-        dispatch(actions.deleteStream(id));
+        const streams = Object.keys(getState().fetchStreams).filter(ID => ID !== id)
+        dispatch(actions.fetchStreams(streams));
+        history.push('/');
 
     } catch(error) {
         console.log(error);
@@ -74,6 +76,8 @@ export default {
     createStream,
     fetchStreams,
     fetchStream,
+    editStream,
+    deleteStream,
     signIn,
     signOut
 }
