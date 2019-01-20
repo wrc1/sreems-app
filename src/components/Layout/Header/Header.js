@@ -12,7 +12,7 @@ export const Header = () => {
             </div>
             <div className={'right-header'}>
                 <Link to={'/'}>
-                    Streams
+                    Streams Demo App
                 </Link>
             </div>
             <GoogleAuth />
